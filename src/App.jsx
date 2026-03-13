@@ -76,7 +76,9 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Sheer Health Timeline</h1>
+      <div className="header">
+        <h1>Sheer Health Timeline</h1>
+      </div>
       <div className="main">
         <div className="sidebar">
           {events.length === 0 ? (
@@ -84,11 +86,11 @@ function App() {
           ) : (
             <>
               {events.map((el) => (
-                <div key={el.event_id}>
+                <div key={el.event_id} className="event-card">
                   <button onClick={() => setCurEvent(el)}>
                     {el.event_type}
                   </button>
-                </>
+                </div>
               ))}
             </>
           )}
