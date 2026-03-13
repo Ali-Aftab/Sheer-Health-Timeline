@@ -75,35 +75,42 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="app">
       <h1>Sheer Health Timeline</h1>
-
-      {events.length === 0 ? (
-        <h1>No Events found for this account!</h1>
-      ) : (
-        <ul>
-          {events.map((el) => (
-            <li key={el.event_id}>
-              <button onClick={() => setCurEvent(el)}>{el.event_type}</button>
-            </li>
-          ))}
-        </ul>
-      )}
-      {Object.keys(curEvent).length ? (
-        <>
-          <button onClick={() => setScenario("messages")}>Messages</button>
-          <button onClick={() => setScenario("supportNotes")}>
-            Support Notes
-          </button>
-          <button onClick={() => setScenario("attachments")}>
-            Attachments
-          </button>
-          <button onClick={() => setScenario("bills")}>Bills</button>
-        </>
-      ) : (
-        <h1>Select an event!</h1>
-      )}
-    </>
+      <div className="main">
+        <div className="sidebar">
+          {events.length === 0 ? (
+            <h1>No Events found for this account!</h1>
+          ) : (
+            <>
+              {events.map((el) => (
+                <div key={el.event_id}>
+                  <button onClick={() => setCurEvent(el)}>
+                    {el.event_type}
+                  </button>
+                </>
+              ))}
+            </>
+          )}
+        </div>
+        <div className="detail">
+          {Object.keys(curEvent).length ? (
+            <>
+              <button onClick={() => setScenario("messages")}>Messages</button>
+              <button onClick={() => setScenario("supportNotes")}>
+                Support Notes
+              </button>
+              <button onClick={() => setScenario("attachments")}>
+                Attachments
+              </button>
+              <button onClick={() => setScenario("bills")}>Bills</button>
+            </>
+          ) : (
+            <h1>Select an event!</h1>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
