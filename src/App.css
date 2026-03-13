@@ -49,6 +49,9 @@ body {
 }
 
 .event-card button {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   background: none;
   border: none;
   font-family: inherit;

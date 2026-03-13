@@ -7,7 +7,11 @@ const Sidebar = ({ events, setCurEvent }) => {
         <>
           {events.map((el) => (
             <div key={el.event_id} className="event-card">
-              <button onClick={() => setCurEvent(el)}>{el.event_type}</button>
+              <button onClick={() => setCurEvent(el)}>
+                <span>{el.event_type}</span>
+                <span>{new Date(el.create_time).toLocaleString()}</span>
+                <span>{el.details.slice(0, 20) + "..."}</span>
+              </button>
             </div>
           ))}
         </>
