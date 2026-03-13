@@ -3,7 +3,7 @@ import { useState } from "react";
 const EventInfo = ({ curEvent }) => {
   const [curTab, setCurTab] = useState("");
 
-  if (Object.keys(curEvent).length)
+  if (!Object.keys(curEvent).length)
     return (
       <div className="event-info">
         <h1>Select an event!</h1>
