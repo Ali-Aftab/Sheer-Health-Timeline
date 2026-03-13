@@ -7,8 +7,9 @@ function App() {
   );
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
   const [events, setEvents] = useState([]);
+  const [curEvent, setCurEvent] = useState({});
+  const [scenario, setScenario] = useState("");
 
   const filterByAccount = (el) => el.account_id === accountID;
 
@@ -35,27 +36,26 @@ function App() {
       const filteredAttachments = attachments.filter(filterByAccount);
       const filteredBills = bill.filter(filterByAccount);
 
-      events.forEach((oneEvent) => {
-        const { event_id } = oneEvent;
-        oneEvent.messages = filteredMessages.filter(
-          (el) => el.event_id === event_id,
-        );
-        oneEvent.supportNotes = filteredSupportNotes.filter(
-          (el) => el.event_id === event_id,
-        );
-        oneEvent.attachments = filteredAttachments.filter(
-          (el) => el.event_id === event_id,
-        );
-        oneEvent.bills = filteredBills.filter((el) => el.event_id === event_id);
-      });
-
-      setEvents(events);
+      const eventList = events.map((oneEvent) => ({
+        ...oneEvent,
+        messages: filteredMessages.filter(
+          (message) => message.event_id === oneEvent.event_id,
+        ),
+        supportNotes: filteredSupportNotes.filter(
+          (note) => note.event_id === oneEvent.event_id,
+        ),
+        attachments: filteredAttachments.filter(
+          (attachment) => attachment.event_id === oneEvent.event_id,
+        ),
+        bills: filteredBills.filter(
+          (bill) => bill.event_id === oneEvent.event_id,
+        ),
+      }));
+      setEvents(eventList);
 
       const { first_name, last_name } = curAccount;
       setFirstName(first_name);
       setLastName(last_name);
-
-      console.log(events);
     } catch (error) {
       alert(error);
     }
@@ -84,10 +84,24 @@ function App() {
         <ul>
           {events.map((el) => (
             <li key={el.event_id}>
-              <button>{el.event_type}</button>
+              <button onClick={() => setCurEvent(el)}>{el.event_type}</button>
             </li>
           ))}
         </ul>
+      )}
+      {Object.keys(curEvent).length ? (
+        <>
+          <button onClick={() => setScenario("messages")}>Messages</button>
+          <button onClick={() => setScenario("supportNotes")}>
+            Support Notes
+          </button>
+          <button onClick={() => setScenario("attachments")}>
+            Attachments
+          </button>
+          <button onClick={() => setScenario("bills")}>Bills</button>
+        </>
+      ) : (
+        <h1>Select an event!</h1>
       )}
     </>
   );
