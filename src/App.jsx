@@ -38,21 +38,23 @@ function App() {
       const filteredAttachments = attachments.filter(filterByAccount);
       const filteredBills = bill.filter(filterByAccount);
 
-      const eventList = events.map((oneEvent) => ({
-        ...oneEvent,
-        messages: filteredMessages.filter(
-          (message) => message.event_id === oneEvent.event_id,
-        ),
-        supportNotes: filteredSupportNotes.filter(
-          (note) => note.event_id === oneEvent.event_id,
-        ),
-        attachments: filteredAttachments.filter(
-          (attachment) => attachment.event_id === oneEvent.event_id,
-        ),
-        bills: filteredBills.filter(
-          (bill) => bill.event_id === oneEvent.event_id,
-        ),
-      }));
+      const eventList = events
+        .map((oneEvent) => ({
+          ...oneEvent,
+          messages: filteredMessages
+            .filter((message) => message.event_id === oneEvent.event_id)
+            .sort((a, b) => new Date(a.create_time) - new Date(b.create_time)),
+          supportNotes: filteredSupportNotes
+            .filter((note) => note.event_id === oneEvent.event_id)
+            .sort((a, b) => new Date(a.create_time) - new Date(b.create_time)),
+          attachments: filteredAttachments
+            .filter((attachment) => attachment.event_id === oneEvent.event_id)
+            .sort((a, b) => new Date(a.create_time) - new Date(b.create_time)),
+          bills: filteredBills
+            .filter((bill) => bill.event_id === oneEvent.event_id)
+            .sort((a, b) => new Date(a.create_time) - new Date(b.create_time)),
+        }))
+        .sort((a, b) => new Date(b.create_time) - new Date(a.create_time));
       setEvents(eventList);
 
       const { first_name, last_name } = curAccount;
@@ -80,7 +82,11 @@ function App() {
     <div className="app">
       <Header />
       <div className="main">
-        <Sidebar events={events} setCurEvent={setCurEvent} />
+        <Sidebar
+          events={events}
+          curEvent={curEvent}
+          setCurEvent={setCurEvent}
+        />
         <EventInfo curEvent={curEvent} />
       </div>
     </div>
