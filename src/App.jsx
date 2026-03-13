@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import EventInfo from "./components/EventInfo";
 
 function App() {
   const [accountID, setAccountID] = useState(
@@ -11,7 +12,6 @@ function App() {
   const [lastName, setLastName] = useState("");
   const [events, setEvents] = useState([]);
   const [curEvent, setCurEvent] = useState({});
-  const [scenario, setScenario] = useState("");
 
   const filterByAccount = (el) => el.account_id === accountID;
 
@@ -81,22 +81,7 @@ function App() {
       <Header />
       <div className="main">
         <Sidebar events={events} setCurEvent={setCurEvent} />
-        <div className="detail">
-          {Object.keys(curEvent).length ? (
-            <>
-              <button onClick={() => setScenario("messages")}>Messages</button>
-              <button onClick={() => setScenario("supportNotes")}>
-                Support Notes
-              </button>
-              <button onClick={() => setScenario("attachments")}>
-                Attachments
-              </button>
-              <button onClick={() => setScenario("bills")}>Bills</button>
-            </>
-          ) : (
-            <h1>Select an event!</h1>
-          )}
-        </div>
+        <EventInfo curEvent={curEvent} />
       </div>
     </div>
   );
