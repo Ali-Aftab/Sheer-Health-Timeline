@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Header from "./components/Header";
 
 function App() {
   const [accountID, setAccountID] = useState(
@@ -76,9 +77,7 @@ function App() {
 
   return (
     <div className="app">
-      <div className="header">
-        <h1>Sheer Health Timeline</h1>
-      </div>
+      <Header />
       <div className="main">
         <div className="sidebar">
           {events.length === 0 ? (
