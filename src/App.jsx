@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const [accountID, setAccountID] = useState(
@@ -79,21 +80,7 @@ function App() {
     <div className="app">
       <Header />
       <div className="main">
-        <div className="sidebar">
-          {events.length === 0 ? (
-            <h1>No Events found for this account!</h1>
-          ) : (
-            <>
-              {events.map((el) => (
-                <div key={el.event_id} className="event-card">
-                  <button onClick={() => setCurEvent(el)}>
-                    {el.event_type}
-                  </button>
-                </div>
-              ))}
-            </>
-          )}
-        </div>
+        <Sidebar events={events} setCurEvent={setCurEvent} />
         <div className="detail">
           {Object.keys(curEvent).length ? (
             <>
