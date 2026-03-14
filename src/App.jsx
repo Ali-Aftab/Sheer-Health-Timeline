@@ -31,9 +31,6 @@ function App() {
         throw new Error("Account Not Found");
       }
 
-      const filteredEvents = events.filter(filterByAccount);
-      setEvents(filteredEvents);
-
       const filteredMessages = messages.filter(filterByAccount);
       const filteredSupportNotes = support_notes.filter(filterByAccount);
       const filteredAttachments = attachments.filter(filterByAccount);
@@ -46,6 +43,7 @@ function App() {
       };
 
       const eventList = events
+        .filter(filterByAccount)
         .map((oneEvent) => ({
           ...oneEvent,
           messages: filterAndSortEvents(filteredMessages, oneEvent.event_id),
