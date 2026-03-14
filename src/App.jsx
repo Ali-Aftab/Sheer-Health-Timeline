@@ -39,21 +39,25 @@ function App() {
       const filteredAttachments = attachments.filter(filterByAccount);
       const filteredBills = bill.filter(filterByAccount);
 
+      const filterAndSortEvents = (arr, id) => {
+        return arr
+          .filter((el) => el.event_id === id)
+          .sort((a, b) => new Date(a.create_time) - new Date(b.create_time));
+      };
+
       const eventList = events
         .map((oneEvent) => ({
           ...oneEvent,
-          messages: filteredMessages
-            .filter((message) => message.event_id === oneEvent.event_id)
-            .sort((a, b) => new Date(a.create_time) - new Date(b.create_time)),
-          supportNotes: filteredSupportNotes
-            .filter((note) => note.event_id === oneEvent.event_id)
-            .sort((a, b) => new Date(a.create_time) - new Date(b.create_time)),
-          attachments: filteredAttachments
-            .filter((attachment) => attachment.event_id === oneEvent.event_id)
-            .sort((a, b) => new Date(a.create_time) - new Date(b.create_time)),
-          bills: filteredBills
-            .filter((bill) => bill.event_id === oneEvent.event_id)
-            .sort((a, b) => new Date(a.create_time) - new Date(b.create_time)),
+          messages: filterAndSortEvents(filteredMessages, oneEvent.event_id),
+          supportNotes: filterAndSortEvents(
+            filteredSupportNotes,
+            oneEvent.event_id,
+          ),
+          attachments: filterAndSortEvents(
+            filteredAttachments,
+            oneEvent.event_id,
+          ),
+          bills: filterAndSortEvents(filteredBills, oneEvent.event_id),
         }))
         .sort((a, b) => new Date(b.create_time) - new Date(a.create_time));
       setEvents(eventList);
@@ -73,8 +77,8 @@ function App() {
       event_id,
       account_id,
       create_time: new Date().toISOString(),
+      [`${scenario}_id`]: crypto.randomUUID(),
     };
-    obj[`${scenario}_id`] = crypto.randomUUID();
 
     setEvents((prev) =>
       prev.map((el) =>
