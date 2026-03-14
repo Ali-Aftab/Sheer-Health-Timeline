@@ -11,7 +11,8 @@ function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [events, setEvents] = useState([]);
-  const [curEvent, setCurEvent] = useState({});
+  const [curEventId, setCurEventId] = useState(null);
+  const curEvent = events.find((ev) => ev.event_id === curEventId) || {};
 
   const filterByAccount = (el) => el.account_id === accountID;
 
@@ -65,6 +66,25 @@ function App() {
     }
   };
 
+  const handleList = (scenario, options) => {
+    const { event_id, account_id } = curEvent;
+    const obj = {
+      ...options,
+      event_id,
+      account_id,
+      create_time: new Date().toISOString(),
+    };
+    obj[`${scenario}_id`] = crypto.randomUUID();
+
+    setEvents((prev) =>
+      prev.map((el) =>
+        el.event_id === event_id
+          ? { ...el, [`${scenario}s`]: [...el[`${scenario}s`], obj] }
+          : el,
+      ),
+    );
+  };
+
   const getEventData = async () => {
     const res = await fetch("./data.json");
     if (!res.ok) {
@@ -82,12 +102,8 @@ function App() {
     <div className="app">
       <Header />
       <div className="main">
-        <Sidebar
-          events={events}
-          curEvent={curEvent}
-          setCurEvent={setCurEvent}
-        />
-        <EventInfo curEvent={curEvent} />
+        <Sidebar events={events} setCurEventId={setCurEventId} />
+        <EventInfo curEvent={curEvent} handleList={handleList} />
       </div>
     </div>
   );

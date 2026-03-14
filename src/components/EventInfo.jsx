@@ -1,6 +1,7 @@
 import { useState } from "react";
+import Attachments from "./Attachments";
 
-const EventInfo = ({ curEvent }) => {
+const EventInfo = ({ curEvent, handleList }) => {
   const [curTab, setCurTab] = useState("");
 
   if (!Object.keys(curEvent).length)
@@ -29,6 +30,12 @@ const EventInfo = ({ curEvent }) => {
       <button onClick={() => setCurTab("supportNotes")}>Support Notes</button>
       <button onClick={() => setCurTab("attachments")}>Attachments</button>
       <button onClick={() => setCurTab("bills")}>Bills</button>
+
+      {curTab === "attachments" ? (
+        <Attachments list={attachments} handleList={handleList} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
