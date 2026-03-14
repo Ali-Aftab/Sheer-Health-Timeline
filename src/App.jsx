@@ -122,7 +122,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header firstName={firstName} lastName={lastName} />
       <div className="main">
         <Sidebar
           events={events}
