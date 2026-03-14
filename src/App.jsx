@@ -3,18 +3,20 @@ import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import EventInfo from "./components/EventInfo";
+import CreateEvent from "./components/CreateEvent";
 
 function App() {
-  const [accountID, setAccountID] = useState(
+  const [accountId, setAccountId] = useState(
     "17c5ab27-a3ab-49c1-a5ba-611613769549",
   );
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [events, setEvents] = useState([]);
+  const [creatingEvent, setCreatingEvent] = useState(false);
   const [curEventId, setCurEventId] = useState(null);
   const curEvent = events.find((ev) => ev.event_id === curEventId) || {};
 
-  const filterByAccount = (el) => el.account_id === accountID;
+  const filterByAccount = (el) => el.account_id === accountId;
 
   const getAccountData = async () => {
     try {
@@ -26,7 +28,7 @@ function App() {
       const { accounts, events, messages, support_notes, attachments, bill } =
         await res.json();
 
-      const curAccount = accounts.find((el) => el.account_id === accountID);
+      const curAccount = accounts.find((el) => el.account_id === accountId);
       if (!curAccount) {
         throw new Error("Account Not Found");
       }
@@ -87,6 +89,24 @@ function App() {
     );
   };
 
+  const createOneEvent = (eventType, eventDetail) => {
+    const eventId = crypto.randomUUID();
+    const oneEvent = {
+      account_id: accountId,
+      event_id: eventId,
+      create_time: new Date().toISOString(),
+      event_type: eventType,
+      details: eventDetail,
+      messages: [],
+      supportNotes: [],
+      attachments: [],
+      bills: [],
+    };
+    setEvents((prev) => [oneEvent, ...prev]);
+    setCreatingEvent(false);
+    setCurEventId(eventId);
+  };
+
   const getEventData = async () => {
     const res = await fetch("./data.json");
     if (!res.ok) {
@@ -104,8 +124,19 @@ function App() {
     <div className="app">
       <Header />
       <div className="main">
-        <Sidebar events={events} setCurEventId={setCurEventId} />
-        <EventInfo curEvent={curEvent} handleList={handleList} />
+        <Sidebar
+          events={events}
+          setCurEventId={setCurEventId}
+          setCreatingEvent={setCreatingEvent}
+        />
+        {creatingEvent ? (
+          <CreateEvent
+            createOneEvent={createOneEvent}
+            setCreatingEvent={setCreatingEvent}
+          />
+        ) : (
+          <EventInfo curEvent={curEvent} handleList={handleList} />
+        )}
       </div>
     </div>
   );
