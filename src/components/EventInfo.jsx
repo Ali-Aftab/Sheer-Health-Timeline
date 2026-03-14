@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Attachments from "./Attachments";
 import Messages from "./Messages";
+import Bills from "./Bills";
 
 const EventInfo = ({ curEvent, handleList }) => {
   const [curTab, setCurTab] = useState("");
@@ -42,6 +43,7 @@ const EventInfo = ({ curEvent, handleList }) => {
       ) : (
         ""
       )}
+      {curTab === "bills" ? <Bills list={bills} /> : ""}
     </div>
   );
 };
