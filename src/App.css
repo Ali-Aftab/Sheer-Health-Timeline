@@ -20,6 +20,12 @@ body {
   background: #3c40c6;
   color: #ffffff;
   padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.account-name {
+  font-size: 11px;
 }
 
 .main {
