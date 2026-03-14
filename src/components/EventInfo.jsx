@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Attachments from "./Attachments";
+import Messages from "./Messages";
 
 const EventInfo = ({ curEvent, handleList }) => {
   const [curTab, setCurTab] = useState("");
@@ -33,6 +34,11 @@ const EventInfo = ({ curEvent, handleList }) => {
 
       {curTab === "attachments" ? (
         <Attachments list={attachments} handleList={handleList} />
+      ) : (
+        ""
+      )}
+      {curTab === "messages" ? (
+        <Messages list={messages} handleList={handleList} />
       ) : (
         ""
       )}
