@@ -9,25 +9,26 @@ const Messages = ({ list, handleList }) => {
     setText("");
   };
   return (
-    <div>
-      <h4>Messages</h4>
-      {list.length > 0
-        ? list.map((message) => (
-            <div key={message.message_id}>
-              <h6>{message.text}</h6>
-            </div>
-          ))
-        : ""}
-      <br />
-      <h4>Type Message Below</h4>
-      <form onSubmit={handleSendMessage}>
+    <div className="tab-content">
+      <p className="tab-title">Messages</p>
+      {list.map((message) => (
+        <div key={message.message_id} className="tab-item">
+          <p className="tab-item-text">{message.text}</p>
+          <p className="tab-item-label">
+            {new Date(message.create_time).toLocaleString()}
+          </p>
+        </div>
+      ))}
+      <form className="message-form" onSubmit={handleSendMessage}>
         <input
+          className="tab-input"
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <br />
-        <button type="submit">Send</button>
+        <button className="tab-btn-submit" type="submit">
+          Send
+        </button>
       </form>
     </div>
   );
