@@ -1,16 +1,24 @@
-# React + Vite
+# Sheer Health Timeline
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A timeline overview of a users recent health insurance history of their events that includes their messages, attachments, support notes, and bills. This project was made with [Node.js][node], [Vite][vite], and [React][react].
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+You need [Node.js/NPM][node] and [Git][git] installed on your system.
 
-## React Compiler
+## Get Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. In your terminal type `git clone https://github.com/Ali-Aftab/Sheer-Health-Timeline.git`
+2. Access the folder with `cd Sheer-Health-Timeline`
+3. Install the required modules with `npm install`
+4. Type `npm run dev` to start the application
+5. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to interact with the application!
 
-## Expanding the ESLint configuration
+[node]: https://nodejs.org/
+[git]: https://git-scm.com/
+[react]: https://react.dev/
+[vite]: https://vitejs.dev/
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<p align="center">
+            <img src="/public/readMe.png" width="50%" height="50%" >
+</p>
