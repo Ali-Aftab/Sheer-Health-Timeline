@@ -60,30 +60,6 @@ body {
   color: #808e9b;
   margin-bottom: 20px;
 }
-.tab-bar {
-  display: flex;
-  gap: 0;
-  border-bottom: 2px solid #d2dae2;
-  margin-bottom: 20px;
-}
-.tab-btn {
-  padding: 8px 16px;
-  border: none;
-  background: none;
-  font-family: inherit;
-  font-size: 13px;
-  cursor: pointer;
-  color: #808e9b;
-  margin-bottom: -2px;
-}
-.tab-btn:hover {
-  color: #1e272e;
-}
-.tab-active {
-  color: #3c40c6;
-  border-bottom: 2px solid #3c40c6;
-  font-weight: bold;
-}
 .event-card {
   padding: 12px 16px;
   border-bottom: 1px solid #d2dae2;
@@ -155,4 +131,97 @@ body {
   border-color: #3c40c6;
   color: #ffffff;
   font-weight: bold;
+}
+
+.create-event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.create-event-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.create-event-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.tab-btn-cancel {
+  padding: 8px 16px;
+  background: none;
+  color: #808e9b;
+  border: 2px solid #d2dae2;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tab-btn-cancel:hover {
+  border-color: #ff3f34;
+  color: #ff3f34;
+}
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tab-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #808e9b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.tab-item {
+  padding: 12px 16px;
+  border: 1px solid #d2dae2;
+  border-radius: 4px;
+}
+
+.tab-item-label {
+  font-size: 11px;
+  color: #808e9b;
+  margin-bottom: 4px;
+}
+
+.tab-item-text {
+  font-size: 14px;
+  color: #1e272e;
+}
+
+.tab-input {
+  padding: 8px 12px;
+  border: 2px solid #d2dae2;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+}
+
+.tab-input:focus {
+  border-color: #3c40c6;
+}
+
+.tab-btn-submit {
+  padding: 8px 16px;
+  background: #3c40c6;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tab-btn-submit:hover {
+  background: #575fcf;
 }
