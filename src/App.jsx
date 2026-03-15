@@ -126,6 +126,7 @@ function App() {
       <div className="main">
         <Sidebar
           events={events}
+          curEventId={curEventId}
           setCurEventId={setCurEventId}
           setCreatingEvent={setCreatingEvent}
         />

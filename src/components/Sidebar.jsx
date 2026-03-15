@@ -1,4 +1,4 @@
-const Sidebar = ({ events, setCurEventId, setCreatingEvent }) => {
+const Sidebar = ({ events, curEventId, setCurEventId, setCreatingEvent }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -7,7 +7,7 @@ const Sidebar = ({ events, setCurEventId, setCreatingEvent }) => {
           className="new-event-btn"
           onClick={() => setCreatingEvent(true)}
         >
-          +
+          + New Event
         </button>
       </div>
       {events.length === 0 ? (
@@ -15,7 +15,10 @@ const Sidebar = ({ events, setCurEventId, setCreatingEvent }) => {
       ) : (
         <>
           {events.map((el) => (
-            <div key={el.event_id} className="event-card">
+            <div
+              key={el.event_id}
+              className={`event-card ${curEventId === el.event_id ? "event-card-active" : ""}`}
+            >
               <button
                 onClick={() => {
                   setCurEventId(el.event_id);
@@ -23,8 +26,8 @@ const Sidebar = ({ events, setCurEventId, setCreatingEvent }) => {
                 }}
               >
                 <span>{el.event_type}</span>
+                <span>{el.details.slice(0, 40) + "..."}</span>
                 <span>{new Date(el.create_time).toLocaleString()}</span>
-                <span>{el.details.slice(0, 20) + "..."}</span>
               </button>
             </div>
           ))}
