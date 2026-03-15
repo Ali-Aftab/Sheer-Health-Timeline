@@ -225,3 +225,24 @@ body {
 .tab-btn-submit:hover {
   background: #575fcf;
 }
+
+.bill-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bill-billed {
+  font-size: 14px;
+  color: #ff3f34;
+}
+
+.bill-allowed {
+  font-size: 14px;
+  color: #0be881;
+}
+
+.bill-cost {
+  font-size: 14px;
+  color: #575fcf;
+}
