@@ -107,15 +107,6 @@ function App() {
     setCurEventId(eventId);
   };
 
-  const getEventData = async () => {
-    const res = await fetch("./data.json");
-    if (!res.ok) {
-      throw new Error(`Cant get patient data: ${res.status}`);
-    }
-
-    const { messages, support_notes, attachments, bill } = await res.json();
-  };
-
   useEffect(() => {
     getAccountData();
   }, []);
